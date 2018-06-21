@@ -1,0 +1,9 @@
+<div class="modal" #modal>
+  <div class="modal-container" #content>
+    <button class="close-modal" (click)="close()" type="button"></button>
+
+    <div class="modal-content" [class.padding]="padding">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

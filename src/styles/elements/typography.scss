@@ -1,0 +1,12 @@
+h3 {
+  @extend %title--medium;
+}
+
+h5 {
+  @extend %title--small;
+}
+
+p,
+span {
+  @extend %body;
+}

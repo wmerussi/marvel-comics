@@ -1,0 +1,20 @@
+/// # Strip Unit
+///
+/// Sass function to remove the unit from number.
+///
+/// @group     Functions
+///
+/// @return    {number} Number without unit
+///
+/// @param     {string} $number - Number with unit
+///
+/// @example - Usage
+///   $number: strip-unit(20px); // equal 20
+///
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}

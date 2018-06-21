@@ -1,0 +1,41 @@
+<div class="container">
+  <ap-comic-list
+    [comics]="comics"
+    [selectedComics]="selectedComics"
+    (onExcludeComic)="excludeComic($event)"
+    (onIncludeComic)="includeComic($event)"
+    (onShowDetails)="showDetails($event)"
+  ></ap-comic-list>
+
+  <button (click)="checkout()" type="button">Finalizar compra</button>
+</div>
+
+
+<ap-modal
+  #detailsModal
+  [padding]="false"
+  (onClose)="closeDetailsModal()"
+>
+  <ap-comic-details
+    [comic]="comicDetail"
+    [excludeOnly]="isSelected()"
+    (onIncludeComic)="includeComic($event)"
+    (onExcludeComic)="excludeComic($event)"
+  ></ap-comic-details>
+</ap-modal>
+
+<ap-modal #cartModal (onClose)="closeCartModal()">
+  <h5>Checkout</h5>
+
+  <div class="cart-comic-list">
+    <span *ngIf="emptySelectedComics()">Não há comics em seu carrinho de compras!</span>
+
+    <ap-comic-list
+      [comics]="selectedComics"
+      [excludeOnly]="true"
+      [showDetailsButton]="false"
+      [smallerView]="true"
+      (onExcludeComic)="excludeComic($event)"
+    ></ap-comic-list>
+  </div>
+</ap-modal>

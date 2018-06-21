@@ -1,0 +1,30 @@
+/// Border Radius token
+
+$border-radius-values: (
+  base: 5px,
+  circle: 50%,
+  round: 24px,
+);
+
+$border-radius-sides: (
+  left:   ((top, left),    (bottom, left)),
+  top:    ((top, left),    (top, right)),
+  right:  ((top, right),   (bottom, right)),
+  bottom: ((bottom, left), (bottom, right)),
+);
+
+%border-radius{
+  @each $name, $value in $border-radius-values {
+    &--#{$name} {
+      border-radius: $value;
+    }
+
+    @each $side, $values in $border-radius-sides {
+      &--#{$side}-#{$name} {
+        @each $props in $values {
+          border-#{nth($props, 1)}-#{nth($props, 2)}-radius: $value;
+        }
+      }
+    }
+  }
+}

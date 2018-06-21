@@ -1,0 +1,31 @@
+/// Base project colors
+///
+/// This map will only be used in "/variables/_palletes.scss"
+/// If the color is a list, the first value is a hex and the second is the opacity
+///
+$colors: (
+  brand: (
+    blue: (
+      base:  #2A6DFF,
+      dark:  #23496B,
+    ),
+    grey:   #7C8CA6,
+  ),
+  support: (
+    black:  (
+      base:  #0A1018,
+      light: (#00000E, .16),
+    ),
+    silver: #ECF1F9,
+    ice:    #CFE4FF,
+    white:  #FFFFFF,
+    red:    #EB1B2C,
+    blue:   #225EAB,
+  ),
+  additional: (
+    orange: #FAAF19,
+    green:  #6BC700,
+    pink:   #FF447C,
+    purple: #772AFF,
+  ),
+) !default;

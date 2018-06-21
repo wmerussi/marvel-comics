@@ -1,0 +1,43 @@
+/// Body typography config
+///
+/// @require {function}    palette </tools/functions/_palette.scss>
+/// @output  {placeholder} Placeholders for body texts
+
+$body-palette-colors: (
+  text-01,
+  text-02,
+  text-03,
+  text-04,
+);
+
+$body-weights: (
+  regular,
+  medium,
+);
+
+/// Default body token configuration
+%body-default {
+  @extend %font--roboto;
+  @extend %font-size--base;
+  @extend %line-height--base;
+}
+
+/// Body token
+%body {
+  @extend %body-default;
+  @extend %font--regular;
+
+  /// Generates the color modifier token with $body-palette-colors map
+  @each $color in $body-palette-colors {
+    &--#{$color} {
+      color: palette(#{$color});
+    }
+  }
+
+  /// Generates the weight modifier token with $body-weights map
+  @each $weight in $body-weights {
+    &--#{$weight} {
+      @extend %font--#{$weight};
+    }
+  }
+}

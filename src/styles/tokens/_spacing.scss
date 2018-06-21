@@ -1,0 +1,62 @@
+/// Sass function to return all values from a map based on requested keys
+///
+/// @param  {map}           $map  - Map to get values
+/// @param  {string | list} $keys - Keys from map
+/// @return {list}          List of values based on requested keys
+///
+@function map-values-list($map, $keys...) {
+  $values: ();
+
+  @each $key in $keys {
+    @if type-of($key) == list {
+      @each $sub-key in $key {
+        $values: append($values, map-get($map, $sub-key));
+      }
+    } @else {
+      $values: append($values, map-get($map, $key));
+    }
+  }
+
+  @return $values;
+}
+
+
+
+/// Inner spacing
+///
+$spacing: (
+  xsmall: 4px,
+  small:  8px,
+  base:   16px,
+  large:  32px,
+) !default;
+
+/// Sass function to help the usage of spacing map
+///
+/// @require {map} $spacing
+/// @param   {string | list} $sizes - Key from $spacing or px
+/// @return  {list} List of values from $spacing map and/or the px value
+///
+@function spacing($sizes...) {
+  @return map-values-list($spacing, $sizes...);
+}
+
+
+
+/// Laytou spacing
+///
+$layout: (
+  medium: 24px,
+  large:  32px,
+  xlarge: 48px,
+) !default;
+
+/// Sass function to help the usage of spacing map
+///
+/// @require {map} $layout
+/// @param   {string | list} $sizes - Key from $layout or px
+/// @return  {list} List of values from $layout map and/or the px value
+///
+@function layout($sizes...) {
+  @return rem(map-values-list($layout, $sizes));
+}

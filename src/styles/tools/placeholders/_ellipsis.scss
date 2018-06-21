@@ -1,0 +1,8 @@
+/// Placeholder to transform a text into single line
+/// and place '...' if it doesn`t fit it`s container
+///
+%ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

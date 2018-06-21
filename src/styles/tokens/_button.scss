@@ -1,0 +1,94 @@
+/// Mixin to create the button based on type
+/// @require {function} palette </tools/functions/_palette.scss>
+/// @param   {string} $type     [primary] - The button type
+/// @param   {string} $modifier [none]    - Inform the modifier
+/// @output  Attributes for the button
+///
+@mixin button($type: primary, $modifier: none) {
+  $color: palette(text-05);
+  $background-color: palette(ui-06);
+  $border-color: palette(ui-06);
+
+  @if $modifier == danger {
+    $background-color: palette(ui-05);
+    $border-color: palette(ui-05);
+  }
+
+  @if $modifier == negative {
+    $color: palette(text-06);
+    $background-color: palette(inverse-01);
+  }
+
+  @if $modifier == disabled {
+    $background-color: palette(ui-01);
+    $border-color: palette(ui-01);
+  }
+
+  @if $type == outline {
+    $color: palette(text-06);
+    $background-color: palette(support-01);
+    $border-color: palette(brand-01);
+
+    @if $modifier == negative {
+      $color: palette(text-05);
+      $border-color: palette(inverse-01);
+    }
+
+    @if $modifier == disabled {
+      $color: palette(text-03);
+      $border-color: palette(ui-01);
+    }
+  }
+
+  color: $color;
+  background-color: $background-color;
+  border: 1px solid $border-color;
+}
+
+$button-type-config: (
+  primary: (danger, negative, disabled),
+  outline: (negative, disabled),
+);
+
+$button-size-config: (
+  base:   (small),
+  small:  (xsmall, base),
+  medium: (base),
+);
+
+/// Button token
+///
+%button {
+  @extend %border-radius--base;
+  @extend %caption;
+
+  /// Create the button tokens from $button-type-config map
+  @each $type, $modifiers in $button-type-config {
+    &--#{$type} {
+      @include button($type);
+
+      /// Create all modifiers for all types
+      @each $modifier in $modifiers {
+        &-#{$modifier} {
+          @include button($type, $modifier);
+        }
+      }
+    }
+  }
+
+  /// Create all sizes button token based on $button-size-config map
+  @each $size, $values in $button-size-config {
+    $value-adjustment: ();
+
+    /// Subtract 1px from each padding to adjust height and width due "invisible" border size
+    @each $value in $values {
+      /// spacing function returns a list, so we need to get the first value
+      $subtract: nth(spacing($value), 1) - 1;
+      $value-adjustment: append($value-adjustment, $subtract);
+    }
+
+    &--#{$size} {
+      padding: $value-adjustment;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+/// Font token
+
+/// Website font configuration
+///
+/// @param {string} key     - Name used as param to use the chosen font
+/// @param {string} type    - Font type
+/// @param {string} name    - Name of the font to import
+/// @param {map}    weights - Weights of the font to import
+///
+$font-families: (
+  roboto: (
+    type:    sans-serif,
+    name:    Roboto,
+    weights: (400, 500, 700),
+  ),
+) !default;
+
+/// Font weights
+/// Used only on file to translate weight number to string
+///
+$weights: (
+  100: light,
+  400: regular,
+  500: medium,
+  700: bold,
+) !default;
+
+/// Default fallbacks to use when the font fail to load
+/// Used on file '/tools/utils/font-config.scss' to auto set the font fallback
+///
+$fallback: (
+  serif:       ("Times New Roman", Times, serif),
+  sans-serif:  (Arial, Helvetica, sans-serif),
+  handwriting: cursive,
+) !default;
+
+/// It will loop through the $font-families map
+/// and import from google all needed fonts to be used later
+///
+@each $family, $font in $font-families {
+  $font-name: map-get($font, name);
+  $font-type: map-get($font, type);
+  $font-weights: map-get($font, weights);
+
+  %font {
+    &--#{$family} {
+      font-family: $font-name, map-get($fallback, $font-type);
+    }
+  }
+
+  @each $weight in $font-weights {
+    @import url("https://fonts.googleapis.com/css?family=#{$font-name}:#{$weight}");
+
+    %font {
+      &--#{map-get($weights, $weight)} {
+        font-weight: $weight;
+      }
+    }
+  }
+}

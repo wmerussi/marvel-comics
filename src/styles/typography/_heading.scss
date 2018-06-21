@@ -1,0 +1,48 @@
+/// Heading config
+///
+$heading-config: (
+  small:  (font-size: small,  line-height: tiny),   // %heading--small
+  medium: (font-size: medium, line-height: small),  // %heading--medium
+  large:  (font-size: large,  line-height: base),   // %heading--large
+  xlarge: (font-size: xlarge, line-height: medium), // %heading--xlarge
+  huge:   (font-size: huge,   line-height: large),  // %heading--huge
+);
+
+$heading-palette-colors: (
+  text-01, // %heading--text-01
+  text-02, // %heading--text-02
+  text-03, // %heading--text-03
+);
+
+
+/// Default config for heading
+%heading-default {
+  @extend %font--roboto;
+  @extend %font--bold;
+}
+
+/// Generates all tokens with the config above
+%heading {
+  /// Applies the default heading config
+  @extend %heading-default;
+
+  /// Creates the tokens with the configuration from $heading-config map
+  @each $heading, $config in $heading-config {
+    &--#{$heading} {
+      @extend %heading-default;
+
+      @each $attribute, $value in $config {
+        @extend %#{$attribute}--#{$value};
+      }
+    }
+  }
+
+  /// Creates the heading color tokens with $heading-palette-colors map
+  @each $color in $heading-palette-colors {
+    &--#{$color} {
+      @extend %heading-default;
+
+      color: palette($color);
+    }
+  }
+}

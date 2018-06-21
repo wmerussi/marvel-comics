@@ -1,0 +1,31 @@
+/// Sass function to return a value from the $palettes map
+///
+/// @group    Functions
+///
+/// @requires {function} map-get-plus </tools/function/_map-get-plus.scss>
+/// @requires {variable} palettes     </variables/_palettes.scss>
+///
+/// @return   {variable} Color requested
+///
+/// @param    {string}   $palette-path - The palette path
+///
+///
+/// @example scss - Usage
+///   .element {
+///     color: palette(primary);
+///   }
+///
+/// @example css - Compiled
+///   .element {
+///     color: #a4cb1b;
+///   }
+///
+@function palette($palette-path...) {
+  $color: map-get-plus($palettes, $palette-path...);
+
+  @if type-of($color) == list {
+    @return hsla-color(nth($color, 1), nth($color, 2));
+  }
+
+  @return hsla-color($color);
+}

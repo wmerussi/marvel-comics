@@ -1,0 +1,29 @@
+@import "../tools/functions/color";
+
+/// Palette colors
+///
+/// @require {function} color </tools/functions/_color.scss>
+///
+$palettes: (
+  brand-01:   color(brand,      blue, base),
+  brand-02:   color(brand,      blue, dark),
+  brand-03:   color(brand,      grey),
+  text-01:    color(support,    black, base),
+  text-02:    color(brand,      blue, dark),
+  text-03:    color(brand,      grey),
+  text-04:    color(support,    blue),
+  text-05:    color(support,    white),
+  text-06:    color(brand,      blue, base),
+  inverse-01: color(support,    white),
+  support-01: transparent,
+  support-02: color(support,    red),
+  ui-01:      color(brand,      grey),
+  ui-02:      color(support,    white),
+  ui-03:      color(support,    black, light),
+  ui-04:      color(support,    ice),
+  ui-05:      color(support,    red),
+  ui-06:      color(additional, green),
+  field-01:   color(support,    silver),
+  field-02:   color(brand,      grey),
+  field-03:   color(brand,      blue, dark),
+) !default;

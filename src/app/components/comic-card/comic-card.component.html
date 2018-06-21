@@ -1,0 +1,28 @@
+<div class="comic-card" #card [ngClass]="getClasses()">
+  <div class="card-container">
+    <h3>{{ title }}</h3>
+
+    <div class="button-container">
+      <button
+        class="include-comic"
+        *ngIf="!isSelected && !excludeOnly"
+        (click)="includeComic()"
+        type="button"
+      >Incluir</button>
+
+      <button
+        class="exclude-comic"
+        *ngIf="isSelected || excludeOnly"
+        (click)="excludeComic()"
+        type="button"
+      >Excluir</button>
+
+      <button
+        class="show-comic-details"
+        *ngIf="showDetailsButton"
+        (click)="showDetails()"
+        type="button"
+      >Detalhes</button>
+    </div>
+  </div>
+</div>

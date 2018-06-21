@@ -1,0 +1,30 @@
+/// Title configuration map
+///
+$title-sizes: (
+  small:  tiny,
+  medium: small,
+  large:  base,
+  xlarge: medium,
+  huge:   large,
+);
+
+$title-colors: (
+  text-01,
+  text-02,
+  text-03,
+);
+
+%title {
+  @each $title-size, $line-height in $title-sizes {
+    &--#{$title-size} {
+      @extend %heading--#{$title-size};
+      @extend %line-height--#{$line-height};
+    }
+  }
+
+  @each $color in $title-colors {
+    &--#{$color} {
+      @extend %heading--#{$color};
+    }
+  }
+}

@@ -1,0 +1,47 @@
+/// Default duration and type of transition
+///
+$transition-duration: 200ms;
+$transition-type:     ease-in-out;
+
+/// Transition
+///
+/// Mixin to help to create a transition with default values,
+/// but can be used with custom values.
+///
+/// @group  Mixins
+///
+/// @require {variable} $transition-duration </variables/functions-var.scss>
+/// @require {variable} $transition-type     </variables/functions-var.scss>
+///
+/// @output The transition property with default duration and type
+///
+/// @param  {string | list} $property
+///                            - A single ou multiple properties to apply the transition
+/// @param  {number}        $duration [$transition-duration]
+///                            - The duration of the transition
+/// @param  {string}        $type     [$transition-type]
+///                            - The type of the transition
+///
+/// @example scss - Usage
+///   .element {
+///     @include transition((color, background-color));
+///   }
+///
+/// @exeample css - Compiled
+///   .element {
+///     transition: color 200ms ease-in-out, background-color 200ms ease-in-out;
+///   }
+///
+@mixin transition($property, $duration: $transition-duration, $type: $transition-type) {
+  $transition: ();
+
+  @if type-of($property) == list {
+    @each $value in $property {
+      $transition: append($transition, $value $duration $type, "comma");
+    }
+  } @else {
+    $transition: $property $duration $type;
+  }
+
+  transition: $transition;
+}

@@ -1,0 +1,47 @@
+/// # Map Get Plus
+///
+/// Sass function to return a deep value inside a map.
+///
+/// @group     Tools / Functions
+///
+/// @return    {variable} Deep value inside a map
+///
+/// @param     {map}    $map       - The variable name of the map
+/// @param     {string} $keys...   - One or more keys of the map, one inside the other
+///
+/// @example scss map
+///   $colors: (
+///     light: (
+///       lightest: #fff,
+///       base:     #eeedeb,
+///       medium:   #e0e0e0
+///     ),
+///     dark: (
+///       light:   #c9c9c7,
+///       base:    #706f6f,
+///       medium:  #b1afaf,
+///       shades: (
+///         light:   #333,
+///         base:    #222,
+///         darkest: #000
+///       )
+///     )
+///   );
+///
+/// @example scss - Usage
+///   .element {
+///     color: map-get-plus($colors, dark, shades, light);
+///   }
+///
+/// @example css - Compiled
+///   .element {
+///     color: #333;
+///   }
+///
+@function map-get-plus($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}

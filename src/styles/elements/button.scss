@@ -1,0 +1,5 @@
+button {
+  @extend %button;
+  @extend %button--primary;
+  @extend %button--base;
+}

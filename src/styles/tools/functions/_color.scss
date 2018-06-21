@@ -1,0 +1,25 @@
+/// Sass function to return a value from a color map
+///
+/// @group    Functions
+///
+/// @requires {function} map-get-plus </tools/function/_map-get-plus.scss>
+/// @requires {variable} colors       </variables/_colors.scss>
+///
+/// @return   {variable} Color requested
+///
+/// @param    {string}   $color-path - The color path
+///
+///
+/// @example scss - Usage
+///   .element {
+///     color: color($colors, brand, blue, dark);
+///   }
+///
+/// @example css - Compiled
+///   .element {
+///     color: #a4cb1b;
+///   }
+///
+@function color($color-path...) {
+  @return map-get-plus($colors, $color-path...);
+}

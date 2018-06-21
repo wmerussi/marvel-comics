@@ -1,0 +1,45 @@
+/// Paragraph config
+///
+/// @require {function}    palette </tools/functions/_palette.scss>
+/// @output  {placeholder} Placeholders for paragraph texts
+
+$paragraph-palette-colors: (
+  text-01,
+  text-02,
+  text-03,
+  text-04,
+  text-05,
+  text-06,
+);
+
+$paragraph-weights: (
+  regular,
+  medium,
+);
+
+/// Default paragraph token configuration
+%paragraph-default {
+  @extend %font--roboto;
+  @extend %font-size--small;
+  @extend %line-height--xsmall;
+}
+
+/// Paragraph token
+%paragraph {
+  @extend %paragraph-default;
+  @extend %font--regular;
+
+  /// Generates the color modifier token with $paragraph-palette-colors map
+  @each $color in $paragraph-palette-colors {
+    &--#{$color} {
+      color: palette(#{$color});
+    }
+  }
+
+  /// Generates the weight modifier token with $paragraph-weights map
+  @each $weight in $paragraph-weights {
+    &--#{$weight} {
+      @extend %font--#{$weight};
+    }
+  }
+}

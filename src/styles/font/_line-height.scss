@@ -1,0 +1,23 @@
+/// Line Height config
+///
+$line-heights: (
+  xtiny:  14px,
+  tiny:   16px,
+  xsmall: 18px,
+  small:  21px,
+  base:   24px,
+  medium: 36px,
+  large:  48px,
+) !default;
+
+/// Iterate trough all $line-height values and create the line-height tokens
+///
+/// @require {map} $line-heights
+///
+%line-height {
+  @each $name, $height in $line-heights {
+    &--#{$name} {
+      line-height: rem(map-get($line-heights, $name));
+    }
+  }
+}

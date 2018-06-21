@@ -1,0 +1,32 @@
+/// HSLA COLOR
+///
+/// Function to transform the hex color into a native CSS HSLA function,
+/// bypassing the SASS HSLA function
+///
+/// @group functions
+///
+/// @return Native CSS HSLA function
+///
+/// @param {string} $color       - Hex color
+/// @param {number} $opacity [1] - Opacity
+///
+/// @example scss
+///   .element {
+///     color: hsl-color(#fc4509);
+///   }
+///
+/// @example css compiled
+///   .element {
+///     color: hsla( 14.81481deg, 97.59036%, 51.17647%, 1 );
+///   }
+///
+@function hsla-color($color, $opacity: 1) {
+  @return unquote(
+    "hsla(
+      #{hue($color)},
+      #{saturation($color)},
+      #{lightness($color)},
+      #{$opacity}
+    )"
+  );
+}

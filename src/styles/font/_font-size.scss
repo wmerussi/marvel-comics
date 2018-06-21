@@ -1,0 +1,25 @@
+/// Font sizes
+///
+$font-sizes: (
+  tiny:   10px,
+  xsmall: 12px,
+  small:  14px,
+  base:   16px,
+  medium: 18px,
+  large:  22px,
+  xlarge: 32px,
+  huge:   42px,
+) !default;
+
+/// It will iterate through all sizes in $font-sizes map and create the tokens
+///
+/// @require {function} rem </tools/functions/rem.scss>
+/// @output  font-size attribute in rem
+///
+%font-size {
+  @each $name, $size in $font-sizes {
+    &--#{$name} {
+      font-size: rem($size);
+    }
+  }
+}

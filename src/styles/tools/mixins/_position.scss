@@ -1,0 +1,80 @@
+/// Position
+///
+/// Mixin to help the absolute or fixed position of an element.
+///
+/// @group  Mixins
+///
+/// @output The position properties
+///
+/// @param  {string &| list} $options
+///         - vertical, horizontal, both
+///
+/// @example scss - Usage
+///   .element1 {
+///     @include position(vertical);
+///   }
+///
+///   .element2 {
+///     @include position((left: 0, top: 0));
+///   }
+///
+///   .element3 {
+///     @include position(fixed, (right: 0, bottom: 0));
+///   }
+///
+/// @exeample css - Compiled
+///   .element1 {
+///     position: absolute;
+///     top: 50%;
+///     transform: translateY(-50%);
+///   }
+///
+///   .element2 {
+///     position: absolute;
+///     left: 0;
+///     top: 0;
+///   }
+///
+///   .element3 {
+///     position: fixed;
+///     right: 0;
+///     bottom: 0;
+///   }
+///
+@mixin position($options...) {
+  $position: absolute;
+
+  @if (nth($options, 1) == "fixed") {
+    $position: fixed;
+  }
+
+  position: $position;
+
+  @each $property in $options {
+    @if (type-of($property) == map) {
+
+      @each $prop, $value in $property {
+        #{$prop}: #{$value};
+      }
+
+    } @else {
+
+      @if ($property == "vertical") {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      @if ($property == "horizontal") {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      @if ($property == "both") {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+    }
+  }
+}

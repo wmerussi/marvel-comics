@@ -1,0 +1,42 @@
+/// Tiny config
+///
+/// @require {function}    palette </tools/functions/_palette.scss>
+/// @output  {placeholder} Placeholders for tiny texts
+
+$tiny-palette-colors: (
+  text-01,  // %tiny--text-01
+  text-02,  // %tiny--text-02
+  text-03,  // %tiny--text-03
+);
+
+$tiny-weights: (
+  regular,
+  medium,
+);
+
+/// Default tiny token configuration
+%tiny-default {
+  @extend %font--roboto;
+  @extend %font-size--tiny;
+  @extend %line-height--xtiny;
+}
+
+/// Tiny token
+%tiny {
+  @extend %tiny-default;
+  @extend %font--regular;
+
+  /// Generates the color modifier token with $tiny-palette-colors map
+  @each $color in $tiny-palette-colors {
+    &--#{$color} {
+      color: palette(#{$color});
+    }
+  }
+
+  /// Generates the weight modifier token with $tiny-weights map
+  @each $weight in $tiny-weights {
+    &--#{$weight} {
+      @extend %font--#{$weight};
+    }
+  }
+}

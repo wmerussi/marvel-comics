@@ -1,0 +1,68 @@
+/// Grid breakpoints
+///
+/// Define the minimum dimensions at which your layout will change,
+/// adapting to different screen sizes, for use in media queries.
+///
+$grid-breakpoints: (
+  xs: 0,
+  sm: 375px,
+  md: 576px,
+  lg: 768px,
+  xl: 992px,
+  hd: 1200px
+) !default;
+
+/// Mixin to help the usage of media queries on SCSS
+///
+/// @group    Tools
+/// @require  {variable} $grid-breakpoints <./_grid-variables.scss>
+///
+/// @output   When compiled, it will automatically generates the css media property
+///
+/// @param    {string} $breakpoint             - Desired breakpoint
+/// @param    {string} $width [min]            - @media values
+///                                              (min, max or $breakpoints map key)
+///
+/// @example scss - Usage
+///   @include grid(medium) {
+///     background: blue;
+///     width: 50px;
+///   }
+///
+/// @example css - Compiled
+///    @media (min-width: 48.0625em) {
+///      .element {
+///        background: blue;
+///        width: 50%;
+///      }
+///    }
+///
+/// @example scss - Usage
+///   @include grid(medium, xlarge) {
+///     background: blue;
+///     width: 50px;
+///   }
+///
+/// @example css - Compiled
+///    @media (min-width: 48.0625em) and (max-width: 82.5em) {
+///      .element {
+///        background: blue;
+///        width: 50%;
+///      }
+///    }
+///
+@mixin grid($breakpoint, $width: min) {
+  @if map-has-key($grid-breakpoints, $width) {
+    @media (min-width: rem(map-get($grid-breakpoints, $breakpoint))) {
+      @media (max-width: rem(map-get($grid-breakpoints, $width) - 1)) {
+        @content;
+      }
+    }
+  } @else {
+    $mod: if($width == max, 1, 0);
+
+    @media (#{$width}-width: rem(map-get($grid-breakpoints, $breakpoint) - $mod)) {
+      @content;
+    }
+  }
+}

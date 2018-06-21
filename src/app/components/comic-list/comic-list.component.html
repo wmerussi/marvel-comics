@@ -1,0 +1,15 @@
+<ul class="comic-list" [class.smaller-view]="smallerView">
+  <li *ngFor="let comic of comics">
+    <ap-comic-card
+      [fixedCardDetails]="fixedCardDetails"
+      [title]="comic.title"
+      [thumbnail]="comic.thumbnail"
+      [isSelected]="comicIsSelected(comic)"
+      [showDetailsButton]="showDetailsButton"
+      [excludeOnly]="excludeOnly"
+      (onExcludeComic)="excludeComic(comic)"
+      (onIncludeComic)="includeComic(comic)"
+      (onShowDetails)="showDetails(comic)"
+    ></ap-comic-card>
+  </li>
+</ul>

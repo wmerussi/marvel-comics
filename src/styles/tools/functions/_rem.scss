@@ -1,0 +1,45 @@
+/// # REM
+///
+/// Sass function to convert px to rem, based on a base font size.
+/// It`s possible to convert also an entire list.
+///
+/// @group     Functions
+///
+/// @require  {variable} $base-font-size </tokens/font.scss>
+/// @require  {function} strip-unit </tools/functions/strip-unit.scss>
+///
+/// @return   {number} Rem value
+///
+/// @param    {string | list} $values                 - px value(s)
+/// @param    {string}        $base [$base-font-size] - base font size
+///
+/// @example scss usage
+///   .element1 {
+///     margin: rem(16px 32px);
+///   }
+///
+///   .element2 {
+///     padding: rem(32px);
+///   }
+///
+/// @example css compiled
+///   .element1 {
+///     margin: 1rem 2rem;
+///   }
+///
+///   .element2 {
+///     padding: 2rem;
+///   }
+///
+@function rem($values, $base: $base-font-size) {
+  $rem: ();
+
+  @each $value in $values {
+    @if $value {
+      $px-to-rem: strip-unit($value) / strip-unit($base) * 1rem;
+      $rem: append($rem, $px-to-rem);
+    }
+  }
+
+  @return $rem;
+}

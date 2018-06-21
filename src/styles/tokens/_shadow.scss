@@ -1,0 +1,49 @@
+/// Box Shadow Token
+
+/// Base values for each property of box-shadow
+///
+$shadow-base: (
+  x:      0,
+  y:      4px,
+  blur:   8px,
+  spread: 0,
+  color:  palette(ui-03),
+);
+
+/// Modifier name of the shadow token as key
+/// Multiplier as value
+///
+$shadow-sizes: (
+  low:       (x: 0, y: 1, blur: 1, spread: 0),
+  medium:    (x: 0, y: 2, blur: 2, spread: 0),
+  high:      (x: 0, y: 4, blur: 4, spread: 0),
+  very-high: (x: 0, y: 6, blur: 6, spread: 0),
+);
+
+/// Mixin to help the creation of the attribute box-shadow
+///
+/// @param  {map} $multipliers
+/// @output box-shadow base values multiplied by its modifier values
+///
+@mixin box-shadow($multipliers) {
+  $box-shadow-values: ();
+
+  @each $type, $multiplier in $multipliers {
+    $base: map-get($shadow-base, $type);
+    $value: $multiplier * $base;
+
+    $box-shadow-values: append($box-shadow-values, $value);
+  }
+
+  box-shadow: $box-shadow-values map-get($shadow-base, color);
+}
+
+/// Shadow tokens with the $shadow-sizes modifiers
+///
+%shadow {
+  @each $size, $multipliers in $shadow-sizes {
+    &--#{$size} {
+      @include box-shadow($multipliers);
+    }
+  }
+}

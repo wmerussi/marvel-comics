@@ -1,0 +1,44 @@
+/// Caption config
+///
+/// @require {function} palette </tools/functions/_palette.scss>
+/// @output  {placeholder} Placeholders for caption texts
+
+$caption-palette-colors: (
+  text-01,
+  text-02,
+  text-03,
+  text-04,
+  text-05,
+);
+
+$caption-weights: (
+  regular,
+  medium,
+);
+
+/// Default caption token configuration
+%caption-default {
+  @extend %font--roboto;
+  @extend %font-size--xsmall;
+  @extend %line-height--tiny;
+}
+
+/// Caption token
+%caption {
+  @extend %caption-default;
+  @extend %font--regular;
+
+  /// Generates the color modifier token with $caption-palette-colors map
+  @each $color in $caption-palette-colors {
+    &--#{$color} {
+      color: palette(#{$color});
+    }
+  }
+
+  /// Generates the weight modifier token with $caption-weights map
+  @each $weight in $caption-weights {
+    &--#{$weight} {
+      @extend %font--#{$weight};
+    }
+  }
+}

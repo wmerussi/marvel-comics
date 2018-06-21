@@ -1,0 +1,28 @@
+<div class="comic-details">
+  <div class="thumbnail-container">
+    <div class="image-background" #imageBackground></div>
+    <img src="{{ imageUrl }}" alt="">
+  </div>
+
+  <div class="details-container">
+    <h5>Título</h5>
+    <span>{{ title }}</span>
+
+    <h5>Descrição</h5>
+    <span>{{ description || "Sem descrição disponível" }}</span>
+
+    <button
+      class="include-comic"
+      *ngIf="!excludeOnly"
+      (click)="includeComic()"
+      type="button"
+    >Incluir</button>
+
+    <button
+      class="exclude-comic"
+      *ngIf="excludeOnly"
+      (click)="excludeComic()"
+      type="button"
+    >Excluir</button>
+  </div>
+</div>
